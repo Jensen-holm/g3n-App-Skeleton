@@ -16,12 +16,16 @@ type App struct {
 	Cam        *camera.Camera
 	Orbit      *camera.OrbitControl
 	FrameRater *util.FrameRater
+	Sim        *Sim
 	Help       bool
 }
 
 func NewApp() *App {
 	return &App{
-		A:    app.App(),
-		Help: false,
+		A:          app.App(),
+		Scene:      core.NewNode(),
+		Cam:        camera.New(1),
+		FrameRater: util.NewFrameRater(60),
+		Help:       false,
 	}
 }

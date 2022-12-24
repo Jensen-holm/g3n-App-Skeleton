@@ -4,6 +4,8 @@ import "App/apper"
 
 func main() {
 
-	_ = apper.NewApp()
+	a := apper.NewApp()
+	a.Init()
+	a.Run()
 
 }
