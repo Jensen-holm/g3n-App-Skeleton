@@ -38,6 +38,8 @@ func Init(a *app.App) {
 		"green",
 	)
 
+	ground := model.NewPlane(500, 500, 0, "green", false)
+
 	a.Sim = app.NewSim(a.Scene)
 	a.Sim.AddSphere(ball, ball2)
 
@@ -45,6 +47,7 @@ func Init(a *app.App) {
 		a.Cam.Self,
 		app.Light("white", 1, 100, 100, 100),
 		app.Light("white", 1, -100, 100, -100),
+		ground.Mesh,
 		ball.Mesh,
 		ball2.Mesh,
 	)

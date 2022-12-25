@@ -1,7 +1,6 @@
 package apper
 
 import (
-	"fmt"
 	"github.com/g3n/engine/gls"
 	"github.com/g3n/engine/renderer"
 	"log"
@@ -17,11 +16,9 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 
 	a.Sim.UpdateSim(dt)
 
-	// update objects positions
+	// Track objects positions
 	a.Sim.UpdateObjsPos()
 	a.Cam.UpdatePos()
-
-	fmt.Println(a.Sim.Spheres[0].Pos)
 
 	// render the scene
 	err := r.Render(a.Scene, a.Cam.Self)
