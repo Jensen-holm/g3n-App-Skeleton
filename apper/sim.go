@@ -4,6 +4,7 @@ import (
 	"github.com/g3n/engine/core"
 	"github.com/g3n/engine/experimental/physics"
 	"github.com/g3n/engine/experimental/physics/object"
+	"github.com/g3n/engine/math32"
 	"time"
 )
 
@@ -21,6 +22,19 @@ func (s *Sim) AddBody(bodies ...*object.Body) {
 	for i, b := range bodies {
 		s.Self.AddBody(b, "obj#"+string(rune(i)))
 	}
+}
+
+func (s *Sim) AddConstForce(x, y, z float32) {
+	s.Self.AddForceField(physics.NewConstantForceField(
+		&math32.Vector3{
+			X: x,
+			Y: y,
+			Z: z,
+		},
+	))
+}
+
+func (s *Sim) AddAttractor() {
 }
 
 // UpdateSim -> supposed to be called each frame
