@@ -1,7 +1,6 @@
 package apper
 
 import (
-	"fmt"
 	"github.com/g3n/engine/gls"
 	"github.com/g3n/engine/renderer"
 	"log"
@@ -20,7 +19,7 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 	}
 
 	a.Cam.UpdatePos()
-	fmt.Println(a.Cam.Pos)
+	//fmt.Println(a.Cam.Pos)
 
 	// render the scene
 	err := r.Render(a.Scene, a.Cam.Self)
@@ -28,7 +27,7 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 		log.Fatalf("error rendering the scene: %v", err)
 	}
 
-	a.FrameRater.Wait()
+	//a.FrameRater.Wait()
 }
 
 func (a *App) Run() {

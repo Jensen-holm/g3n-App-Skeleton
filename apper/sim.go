@@ -41,7 +41,7 @@ func (s *Sim) AddAttractor() {
 // UpdateSim -> supposed to be called each frame
 func (s *Sim) UpdateSim(deltaTime time.Duration) {
 	s.Self.Step(
-		float32(deltaTime.Microseconds()),
+		float32(deltaTime.Seconds()),
 	)
 }
 
