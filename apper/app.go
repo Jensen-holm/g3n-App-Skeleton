@@ -18,12 +18,14 @@ type App struct {
 	Help       bool
 }
 
-func NewApp() *App {
-	return &App{
+func NewApp(helper bool) *App {
+	var a = &App{
 		A:          app.App(),
 		Scene:      core.NewNode(),
 		Cam:        NewCam(),
 		FrameRater: util.NewFrameRater(60),
-		Help:       false,
+		Help:       helper,
 	}
+	a.Prep()
+	return a
 }
