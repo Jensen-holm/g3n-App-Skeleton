@@ -10,7 +10,6 @@ type Sim struct {
 }
 
 func NewSim() {
-
 }
 
 // UpdateSim -> supposed to be called each frame
