@@ -1,15 +1,17 @@
 package apper
 
 import (
+	"App/apper/model"
 	"github.com/g3n/engine/core"
 	"github.com/g3n/engine/experimental/physics"
-	"github.com/g3n/engine/experimental/physics/object"
 	"github.com/g3n/engine/math32"
 	"time"
 )
 
 type Sim struct {
-	Self *physics.Simulation
+	Self    *physics.Simulation
+	Spheres []*model.Sphere
+	Planes  []*model.Plane
 	//Anim *texture.Animator
 }
 
@@ -19,9 +21,10 @@ func NewSim(scene *core.Node) *Sim {
 	}
 }
 
-func (s *Sim) AddBody(bodies ...*object.Body) {
-	for i, b := range bodies {
-		s.Self.AddBody(b, "obj#"+string(rune(i)))
+func (s *Sim) AddSphere(spheres ...*model.Sphere) {
+	for i, sp := range spheres {
+		s.Self.AddBody(sp.Body, "obj#"+string(rune(i)))
+		s.Spheres = append(s.Spheres, sp)
 	}
 }
 
@@ -40,10 +43,11 @@ func (s *Sim) AddAttractor() {
 
 // UpdateSim -> supposed to be called each frame
 func (s *Sim) UpdateSim(deltaTime time.Duration) {
-	s.Self.Step(
-		float32(deltaTime.Seconds()),
-	)
+	s.Self.Step(float32(deltaTime.Seconds()))
 }
 
-func (s *Sim) NewForce() {
+func (s *Sim) UpdateObjsPos() {
+	for _, s := range s.Spheres {
+		s.UpdatePos()
+	}
 }

@@ -1,6 +1,7 @@
 package apper
 
 import (
+	"fmt"
 	"github.com/g3n/engine/gls"
 	"github.com/g3n/engine/renderer"
 	"log"
@@ -14,12 +15,13 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 		gls.COLOR_BUFFER_BIT | gls.DEPTH_BUFFER_BIT | gls.STENCIL_BUFFER_BIT,
 	)
 
-	if a.Sim != nil {
-		a.Sim.UpdateSim(dt)
-	}
+	a.Sim.UpdateSim(dt)
 
+	// update objects positions
+	a.Sim.UpdateObjsPos()
 	a.Cam.UpdatePos()
-	//fmt.Println(a.Cam.Pos)
+
+	fmt.Println(a.Sim.Spheres[0].Pos)
 
 	// render the scene
 	err := r.Render(a.Scene, a.Cam.Self)
@@ -27,7 +29,7 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 		log.Fatalf("error rendering the scene: %v", err)
 	}
 
-	//a.FrameRater.Wait()
+	a.FrameRater.Wait()
 }
 
 func (a *App) Run() {

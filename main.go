@@ -21,6 +21,9 @@ func Init(a *app.App) {
 		10,
 		10,
 		3,
+		0,
+		0,
+		1,
 		"brown",
 	)
 
@@ -29,12 +32,14 @@ func Init(a *app.App) {
 		20,
 		20,
 		3,
+		0,
+		0,
+		1,
 		"green",
 	)
 
 	a.Sim = app.NewSim(a.Scene)
-	a.Sim.AddConstForce(0, -1, 0)
-	a.Sim.AddBody(ball.Body, ball2.Body)
+	a.Sim.AddSphere(ball, ball2)
 
 	a.Add2Scene(
 		a.Cam.Self,

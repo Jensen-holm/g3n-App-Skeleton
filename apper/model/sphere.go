@@ -14,10 +14,10 @@ type Sphere struct {
 	Mat  *material.Standard
 	Mesh *graphic.Mesh
 	Body *object.Body
-	Pos  map[string]float32
+	Pos  *math32.Vector3
 }
 
-func NewSphere(x, y, z, r float32, c string) *Sphere {
+func NewSphere(x, y, z, r, vX, vY, vZ float32, c string) *Sphere {
 	var s = geometry.NewSphere(
 		float64(r),
 		100,
@@ -31,19 +31,22 @@ func NewSphere(x, y, z, r float32, c string) *Sphere {
 	mesh := graphic.NewMesh(s, mat)
 	b := object.NewBody(mesh)
 	b.SetPosition(x, y, z)
+	b.SetVelocity(math32.NewVector3(vX, vY, vZ))
 	return &Sphere{
 		R:    r,
 		Geom: s,
 		Mat:  mat,
 		Mesh: mesh,
 		Body: b,
-		Pos: map[string]float32{
-			"X": x,
-			"Y": y,
-			"Z": z,
+		Pos: &math32.Vector3{
+			X: x,
+			Y: y,
+			Z: z,
 		},
 	}
 }
 
 func (s *Sphere) UpdatePos() {
+	p := s.Mesh.Position()
+	s.Pos = &p
 }

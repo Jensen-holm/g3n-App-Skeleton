@@ -3,11 +3,9 @@ package apper
 import (
 	"github.com/g3n/engine/app"
 	"github.com/g3n/engine/core"
+	"github.com/g3n/engine/experimental/physics/object"
 	"github.com/g3n/engine/util"
 )
-
-// the apper package serves as a wrapper
-// for the g3n application package
 
 type App struct {
 	A          *app.Application
@@ -15,6 +13,7 @@ type App struct {
 	Cam        *Cam
 	Sim        *Sim
 	FrameRater *util.FrameRater
+	Objs       []*object.Body
 	Help       bool
 }
 
