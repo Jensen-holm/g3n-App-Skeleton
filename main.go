@@ -32,9 +32,9 @@ func Init(a *app.App) {
 		"green",
 	)
 
-	sim := app.NewSim(a.Scene)
-	sim.AddConstForce(0, -1, 0)
-	sim.AddBody(ball.Body, ball2.Body)
+	a.Sim = app.NewSim(a.Scene)
+	a.Sim.AddConstForce(0, -1, 0)
+	a.Sim.AddBody(ball.Body, ball2.Body)
 
 	a.Add2Scene(
 		a.Cam.Self,

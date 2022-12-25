@@ -10,6 +10,7 @@ import (
 
 type Sim struct {
 	Self *physics.Simulation
+	//Anim *texture.Animator
 }
 
 func NewSim(scene *core.Node) *Sim {
@@ -38,8 +39,10 @@ func (s *Sim) AddAttractor() {
 }
 
 // UpdateSim -> supposed to be called each frame
-func (s *Sim) UpdateSim(a *App, deltaTime time.Duration) {
-	s.Self.Step(float32(deltaTime))
+func (s *Sim) UpdateSim(deltaTime time.Duration) {
+	s.Self.Step(
+		float32(deltaTime.Microseconds()),
+	)
 }
 
 func (s *Sim) NewForce() {

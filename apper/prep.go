@@ -16,8 +16,7 @@ func (a *App) Prep() {
 	if a.Help {
 		a.Add2Scene(helper.NewAxes(10))
 	}
-
-	// set up the keyboard controls
+	// set up the keyboard controls for the camera
 
 }
 
