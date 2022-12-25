@@ -17,6 +17,8 @@ func (a *App) Prep() {
 		a.Add2Scene(helper.NewAxes(10))
 	}
 
+	// set up the keyboard controls
+
 }
 
 func (a *App) Add2Scene(nodes ...core.INode) {
