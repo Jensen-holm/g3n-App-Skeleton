@@ -8,11 +8,13 @@ import (
 
 func (a *App) Init() {
 
+	a.Cam.Orbit = camera.NewOrbitControl(a.Cam.Self)
+	a.Add2Scene(a.Cam.Self)
+
+	a.A.Gls().ClearColor(.5, .75, 2, .5)
 	if a.Help {
 		a.Add2Scene(helper.NewAxes(10))
 	}
-
-	a.Orbit = camera.NewOrbitControl(a.Cam)
 
 }
 

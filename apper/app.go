@@ -2,7 +2,6 @@ package apper
 
 import (
 	"github.com/g3n/engine/app"
-	"github.com/g3n/engine/camera"
 	"github.com/g3n/engine/core"
 	"github.com/g3n/engine/util"
 )
@@ -13,10 +12,9 @@ import (
 type App struct {
 	A          *app.Application
 	Scene      *core.Node
-	Cam        *camera.Camera
-	Orbit      *camera.OrbitControl
-	FrameRater *util.FrameRater
+	Cam        *Cam
 	Sim        *Sim
+	FrameRater *util.FrameRater
 	Help       bool
 }
 
@@ -24,7 +22,7 @@ func NewApp() *App {
 	return &App{
 		A:          app.App(),
 		Scene:      core.NewNode(),
-		Cam:        camera.New(1),
+		Cam:        NewCam(),
 		FrameRater: util.NewFrameRater(60),
 		Help:       false,
 	}

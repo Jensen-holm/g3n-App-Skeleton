@@ -19,7 +19,7 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 	}
 
 	// render the scene
-	err := r.Render(a.Scene, a.Cam)
+	err := r.Render(a.Scene, a.Cam.Self)
 	if err != nil {
 		log.Fatalf("error rendering the scene: %v", err)
 	}

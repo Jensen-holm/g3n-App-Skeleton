@@ -1,10 +1,11 @@
 package main
 
-import "App/apper"
+import app "App/apper"
 
 func main() {
 
-	a := apper.NewApp()
+	a := app.NewApp()
+	a.ToggleHelp(true)
 	a.Init()
 	a.Run()
 
