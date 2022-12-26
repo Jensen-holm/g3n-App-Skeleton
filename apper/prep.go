@@ -1,6 +1,7 @@
 package apper
 
 import (
+	"App/apper/phys"
 	"github.com/g3n/engine/core"
 	"github.com/g3n/engine/gui"
 	"github.com/g3n/engine/light"
@@ -28,6 +29,10 @@ func (a *App) AddBg(r, g, b, alpha float32) {
 	a.A.Gls().ClearColor(
 		r, g, b, alpha,
 	)
+}
+
+func (a *App) AddSim(s *phys.Sim) {
+	a.Sim = s
 }
 
 func Light(

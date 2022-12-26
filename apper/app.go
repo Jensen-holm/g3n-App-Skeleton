@@ -1,6 +1,7 @@
 package apper
 
 import (
+	"App/apper/phys"
 	"github.com/g3n/engine/app"
 	"github.com/g3n/engine/core"
 	"github.com/g3n/engine/experimental/physics/object"
@@ -11,7 +12,7 @@ type App struct {
 	A          *app.Application
 	Scene      *core.Node
 	Cam        *Cam
-	Sim        *Sim
+	Sim        *phys.Sim
 	FrameRater *util.FrameRater
 	Objs       []*object.Body
 	Help       bool

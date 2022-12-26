@@ -15,14 +15,12 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 		gls.COLOR_BUFFER_BIT | gls.DEPTH_BUFFER_BIT | gls.STENCIL_BUFFER_BIT,
 	)
 
+	a.Cam.UpdatePos()
 	if a.Sim != nil {
-		a.Sim.UpdateSim(dt)
-		a.Sim.UpdateObjsPos()
+		//a.Sim.UpdateObjsPos()
+		a.Sim.Update(dt)
 		fmt.Println(a.Sim.Spheres[0].Pos)
 	}
-
-	a.Cam.UpdatePos()
-	//a.Cam.Self.LookAt(a.Sim.Spheres[1].Pos, a.Sim.Spheres[1].Pos)
 
 	err := r.Render(a.Scene, a.Cam.Self)
 	if err != nil {

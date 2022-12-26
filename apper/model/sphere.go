@@ -11,6 +11,8 @@ import (
 type Sphere struct {
 	R float32
 
+	Velo *math32.Vector3
+
 	Geom *geometry.Geometry
 	Mat  *material.Standard
 	Mesh *graphic.Mesh
@@ -47,22 +49,22 @@ func NewSphere(x, y, z, r float32, c string) *Sphere {
 }
 
 func (s *Sphere) SetVelo(vX, vY, vZ float32) {
-	s.Body.SetVelocity(
-		&math32.Vector3{
-			X: vX,
-			Y: vY,
-			Z: vZ,
-		},
-	)
-}
-
-func (s *Sphere) ChangeVelo(deltaX, deltaY, deltaZ float32) {
-
-}
-
-func (s *Sphere) UpdatePos() {
-	p := s.Mesh.Position()
-	if &p != s.Pos {
-		s.Pos = &p
+	s.Velo = &math32.Vector3{
+		X: vX,
+		Y: vY,
+		Z: vZ,
 	}
 }
+
+func (s *Sphere) Update(newX, newY, newZ float32) {
+	s.Pos = math32.NewVector3(newX, newY, newZ)
+	s.Body.SetPosition(newX, newY, newZ)
+}
+
+// UpdatePos -> should change name to get pos
+//func (s *Sphere) UpdatePos() {
+//	p := s.Mesh.Position()
+//	if &p != s.Pos {
+//		s.Pos = &p
+//	}
+//}

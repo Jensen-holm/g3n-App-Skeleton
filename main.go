@@ -3,7 +3,7 @@ package main
 import (
 	app "App/apper"
 	"App/apper/model"
-	"github.com/g3n/engine/experimental/physics/object"
+	"App/apper/phys"
 )
 
 func main() {
@@ -17,16 +17,19 @@ func main() {
 func Init(a *app.App) {
 	a.AddBg(.5, .75, 2, .5)
 
-	ball := model.NewSphere(0, 0, 0, 3, "purple")
-	ball2 := model.NewSphere(0, 0, 0, 3, "green")
+	sim := phys.NewSim()
+	a.AddSim(sim)
+	sim.AddConstantForce(0, -.98, 0)
+
+	ball := model.NewSphere(3, 1, 1, 3, "purple")
+	ball2 := model.NewSphere(3, 0, 0, 3, "green")
+
+	ball.SetVelo(2, 0, 0)
+	ball2.SetVelo(2, 0, 0)
+
+	sim.AddSphere(ball, ball2)
+
 	ground := model.NewPlane(500, 500, 90, "slategray", false)
-
-	ground.Body.SetBodyType(object.Static)
-
-	a.Sim = app.NewSim(a.Scene)
-	a.Sim.AddSphere(ball, ball2)
-	a.Sim.AddConstForce(0, 0, 0)
-	a.Sim.AddPlane(ground)
 
 	l1 := app.Light("white", 1, 100, 100, 100)
 	l2 := app.Light("white", 1, -100, 100, -100)
