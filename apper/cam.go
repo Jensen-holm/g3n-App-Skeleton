@@ -28,7 +28,9 @@ func NewCam() *Cam {
 // and updates the Pos map inside the Cam struct
 func (c *Cam) UpdatePos() {
 	p := c.Self.Position()
-	c.Pos = &p
+	if &p != c.Pos {
+		c.Pos = &p
+	}
 }
 
 // Move -> Ran when the user presses certain keys to

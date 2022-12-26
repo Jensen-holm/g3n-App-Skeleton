@@ -9,7 +9,8 @@ import (
 )
 
 type Sphere struct {
-	R    float32
+	R float32
+
 	Geom *geometry.Geometry
 	Mat  *material.Standard
 	Mesh *graphic.Mesh
@@ -46,11 +47,13 @@ func NewSphere(x, y, z, r float32, c string) *Sphere {
 }
 
 func (s *Sphere) SetVelo(vX, vY, vZ float32) {
-	s.Body.SetVelocity(&math32.Vector3{
-		X: vX,
-		Y: vY,
-		Z: vZ,
-	})
+	s.Body.SetVelocity(
+		&math32.Vector3{
+			X: vX,
+			Y: vY,
+			Z: vZ,
+		},
+	)
 }
 
 func (s *Sphere) ChangeVelo(deltaX, deltaY, deltaZ float32) {
@@ -59,5 +62,7 @@ func (s *Sphere) ChangeVelo(deltaX, deltaY, deltaZ float32) {
 
 func (s *Sphere) UpdatePos() {
 	p := s.Mesh.Position()
-	s.Pos = &p
+	if &p != s.Pos {
+		s.Pos = &p
+	}
 }
