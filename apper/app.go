@@ -18,7 +18,7 @@ type App struct {
 }
 
 func NewApp(helper bool) *App {
-	var a = &App{
+	a := &App{
 		A:          app.App(),
 		Scene:      core.NewNode(),
 		Cam:        NewCam(),

@@ -1,7 +1,6 @@
 package apper
 
 import (
-	"github.com/g3n/engine/camera"
 	"github.com/g3n/engine/core"
 	"github.com/g3n/engine/gui"
 	"github.com/g3n/engine/light"
@@ -12,7 +11,6 @@ import (
 func (a *App) Prep() {
 
 	gui.Manager().Set(a.Scene)
-	a.Cam.Orbit = camera.NewOrbitControl(a.Cam.Self)
 	if a.Help {
 		a.Add2Scene(helper.NewAxes(10))
 	}

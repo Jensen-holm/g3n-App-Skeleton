@@ -47,11 +47,13 @@ func (s *Sim) AddConstForce(x, y, z float32) {
 
 // UpdateSim -> supposed to be called each frame
 func (s *Sim) UpdateSim(deltaTime time.Duration) {
-	s.Self.Step(float32(deltaTime.Seconds()))
+	s.Self.Step(
+		float32(deltaTime.Seconds()),
+	)
 }
 
 func (s *Sim) UpdateObjsPos() {
-	for _, s := range s.Spheres {
-		s.UpdatePos()
+	for _, sp := range s.Spheres {
+		sp.UpdatePos()
 	}
 }
