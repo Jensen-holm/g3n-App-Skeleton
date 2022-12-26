@@ -23,9 +23,7 @@ func Init(a *app.App) {
 
 	// sphere mass in grams
 	ball := model.NewSphere(0, 500, 0, 3, 145, "red")
-	ball2 := model.NewSphere(0, 3, 0, 3, 0, "green")
-
-	ball.ApplyForce(10, 10, 0)
+	ball2 := model.NewSphere(0, 3, 0, 3, 10, "green")
 
 	sim.AddSphere(ball, ball2)
 

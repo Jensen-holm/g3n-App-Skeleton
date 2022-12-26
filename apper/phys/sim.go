@@ -54,7 +54,9 @@ func (s *Sim) UpdateObjs(time time.Duration) {
 			dtY+initPos.Y,
 			dtZ+initPos.Z,
 		)
+		s.CheckCollisions()
 		s.ApplyGravity(sp)
+
 	}
 }
 
@@ -65,14 +67,22 @@ func (s *Sim) ApplyGravity(sphere *model.Sphere) {
 
 func (s *Sim) CheckCollisions() {
 
+	if s.Plane == nil {
+		return
+	}
+
 	// check if they have hit the ground
 	for _, sphere := range s.Spheres {
 
 		// check if the sphere is above the surface
 		// not what this is doing ...
-		if sphere.Pos.Y <= s.Plane.W {
-			// shoot it back up
-
+		if sphere.Pos.Y-sphere.R <= 0 {
+			// then make it bounce
+			sphere.ApplyForce(
+				sphere.Velo.X,
+				-sphere.Velo.Y,
+				sphere.Velo.Z,
+			)
 		}
 
 		// if not, then it could not hit the surface
