@@ -1,6 +1,7 @@
 package model
 
 import (
+	"github.com/g3n/engine/experimental/physics/object"
 	"github.com/g3n/engine/geometry"
 	"github.com/g3n/engine/graphic"
 	"github.com/g3n/engine/material"
@@ -11,6 +12,7 @@ type Plane struct {
 	G    *geometry.Geometry
 	Mat  *material.Standard
 	Mesh *graphic.Mesh
+	Body *object.Body
 
 	W    float32
 	H    float32
@@ -33,11 +35,13 @@ func NewPlane(w, h, a float32, color string, wire bool) *Plane {
 	mat.SetSide(material.SideDouble)
 	mesh := graphic.NewMesh(p, mat)
 	mesh.RotateX(Deg2Rad(a))
+	b := object.NewBody(mesh)
 	return &Plane{
 		G:    p,
 		A:    a,
 		Mat:  mat,
 		Mesh: mesh,
+		Body: b,
 		W:    w,
 		H:    h,
 	}

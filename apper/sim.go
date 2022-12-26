@@ -28,6 +28,13 @@ func (s *Sim) AddSphere(spheres ...*model.Sphere) {
 	}
 }
 
+func (s *Sim) AddPlane(planes ...*model.Plane) {
+	for _, p := range planes {
+		s.Planes = append(s.Planes, p)
+		s.Self.AddBody(p.Body, "plane")
+	}
+}
+
 func (s *Sim) AddConstForce(x, y, z float32) {
 	s.Self.AddForceField(physics.NewConstantForceField(
 		&math32.Vector3{
@@ -36,9 +43,6 @@ func (s *Sim) AddConstForce(x, y, z float32) {
 			Z: z,
 		},
 	))
-}
-
-func (s *Sim) AddAttractor() {
 }
 
 // UpdateSim -> supposed to be called each frame

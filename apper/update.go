@@ -14,13 +14,13 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 		gls.COLOR_BUFFER_BIT | gls.DEPTH_BUFFER_BIT | gls.STENCIL_BUFFER_BIT,
 	)
 
-	a.Sim.UpdateSim(dt)
+	if a.Sim != nil {
+		a.Sim.UpdateSim(dt)
+		a.Sim.UpdateObjsPos()
+	}
 
-	// Track objects positions
-	a.Sim.UpdateObjsPos()
 	a.Cam.UpdatePos()
 
-	// render the scene
 	err := r.Render(a.Scene, a.Cam.Self)
 	if err != nil {
 		log.Fatalf("error rendering the scene: %v", err)

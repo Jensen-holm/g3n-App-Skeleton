@@ -16,37 +16,21 @@ func main() {
 func Init(a *app.App) {
 	a.AddBg(.5, .75, 2, .5)
 
-	ball := model.NewSphere(
-		10,
-		10,
-		10,
-		3,
-		0,
-		0,
-		1,
-		"brown",
-	)
-
-	ball2 := model.NewSphere(
-		20,
-		20,
-		20,
-		3,
-		0,
-		0,
-		1,
-		"green",
-	)
-
-	ground := model.NewPlane(500, 500, 0, "green", false)
+	ball := model.NewSphere(10, 10, 10, 3, "brown")
+	ball2 := model.NewSphere(20, 20, 20, 3, "green")
+	ground := model.NewPlane(500, 500, 90, "green", false)
 
 	a.Sim = app.NewSim(a.Scene)
 	a.Sim.AddSphere(ball, ball2)
+	a.Sim.AddPlane(ground)
+
+	l1 := app.Light("white", 1, 100, 100, 100)
+	l2 := app.Light("white", 1, -100, 100, -100)
 
 	a.Add2Scene(
 		a.Cam.Self,
-		app.Light("white", 1, 100, 100, 100),
-		app.Light("white", 1, -100, 100, -100),
+		l1,
+		l2,
 		ground.Mesh,
 		ball.Mesh,
 		ball2.Mesh,

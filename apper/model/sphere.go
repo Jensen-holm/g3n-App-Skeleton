@@ -17,11 +17,11 @@ type Sphere struct {
 	Pos  *math32.Vector3
 }
 
-func NewSphere(x, y, z, r, vX, vY, vZ float32, c string) *Sphere {
+func NewSphere(x, y, z, r float32, c string) *Sphere {
 	var s = geometry.NewSphere(
 		float64(r),
-		100,
-		100,
+		10,
+		10,
 	)
 
 	// TODO : make the material more customizable
@@ -31,7 +31,6 @@ func NewSphere(x, y, z, r, vX, vY, vZ float32, c string) *Sphere {
 	mesh := graphic.NewMesh(s, mat)
 	b := object.NewBody(mesh)
 	b.SetPosition(x, y, z)
-	b.SetVelocity(math32.NewVector3(vX, vY, vZ))
 	return &Sphere{
 		R:    r,
 		Geom: s,
@@ -44,6 +43,18 @@ func NewSphere(x, y, z, r, vX, vY, vZ float32, c string) *Sphere {
 			Z: z,
 		},
 	}
+}
+
+func (s *Sphere) SetVelo(vX, vY, vZ float32) {
+	s.Body.SetVelocity(&math32.Vector3{
+		X: vX,
+		Y: vY,
+		Z: vZ,
+	})
+}
+
+func (s *Sphere) ChangeVelo(deltaX, deltaY, deltaZ float32) {
+
 }
 
 func (s *Sphere) UpdatePos() {
