@@ -19,15 +19,11 @@ func Init(a *app.App) {
 
 	sim := phys.NewSim()
 	a.AddSim(sim)
-	sim.SetGravity(0, -10, 0)
+	sim.SetGravity(0, -9.8, 0)
 
-	// sphere mass in grams
-	ball := model.NewSphere(0, 100, 0, 3, 145, "red")
-	ball2 := model.NewSphere(0, 3, 0, 3, 10, "green")
-
+	ball := model.NewSphere(0, 50, 0, 3, 145, "red")
 	ball.ApplyForce(10, 10, 10)
-
-	sim.AddSphere(ball, ball2)
+	sim.AddSphere(ball)
 
 	ground := model.NewPlane(1000, 1000, 90, "slategray", false)
 	sim.SetPlane(ground)
@@ -42,6 +38,5 @@ func Init(a *app.App) {
 		l1, l2, l3, l4,
 		ground.Mesh,
 		ball.Mesh,
-		ball2.Mesh,
 	)
 }
