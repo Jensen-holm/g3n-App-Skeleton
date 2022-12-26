@@ -2,9 +2,9 @@ package phys
 
 const mileFt = 5280
 
-// G2Kg -> converts grams to kilograms
-func G2Kg(g float32) float32 {
-	return g / 1000
+// Kg2G -> converts kilograms to grams
+func Kg2G(kg float32) float32 {
+	return kg * 1000
 }
 
 // Mph2Fps -> converts miles per hour

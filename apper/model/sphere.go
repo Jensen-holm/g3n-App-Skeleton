@@ -12,7 +12,8 @@ type Sphere struct {
 	R    float32
 	Mass float32
 
-	Velo *math32.Vector3
+	Velo       *math32.Vector3
+	OuterForce *math32.Vector3
 
 	Geom *geometry.Geometry
 	Mat  *material.Standard
@@ -36,20 +37,28 @@ func NewSphere(x, y, z, r, m float32, c string) *Sphere {
 	b := object.NewBody(mesh)
 	b.SetPosition(x, y, z)
 	v := math32.NewVector3(0, 0, 0)
+	of := math32.NewVector3(0, 0, 0)
 	return &Sphere{
-		R:    r,
-		Geom: s,
-		Mat:  mat,
-		Mesh: mesh,
-		Body: b,
-		Velo: v,
-		Mass: m,
+		R:          r,
+		Geom:       s,
+		Mat:        mat,
+		Mesh:       mesh,
+		Body:       b,
+		Velo:       v,
+		Mass:       m,
+		OuterForce: of,
 		Pos: &math32.Vector3{
 			X: x,
 			Y: y,
 			Z: z,
 		},
 	}
+}
+
+func (s *Sphere) ApplyForce(x, y, z float32) {
+	s.OuterForce.X = x
+	s.OuterForce.Y = y
+	s.OuterForce.Z = z
 }
 
 func (s *Sphere) SetVelo(vX, vY, vZ float32) {

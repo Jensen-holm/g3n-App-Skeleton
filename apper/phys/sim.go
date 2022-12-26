@@ -7,10 +7,10 @@ import (
 )
 
 type Sim struct {
-	ConstantForces []*math32.Vector3
+	Gravity *math32.Vector3
+	Plane   *model.Plane
 
 	Spheres []*model.Sphere
-	Planes  []*model.Plane
 }
 
 func NewSim() *Sim {
@@ -23,11 +23,12 @@ func (s *Sim) AddSphere(spheres ...*model.Sphere) {
 	}
 }
 
-func (s *Sim) AddConstantForce(x, y, z float32) {
-	s.ConstantForces = append(
-		s.ConstantForces,
-		math32.NewVector3(x, y, z),
-	)
+func (s *Sim) SetPlane(p *model.Plane) {
+	s.Plane = p
+}
+
+func (s *Sim) SetGravity(x, y, z float32) {
+	s.Gravity = math32.NewVector3(x, y, z)
 }
 
 // Init -> if there are forces in the sim,
@@ -44,21 +45,38 @@ func (s *Sim) UpdateObjs(time time.Duration) {
 		initPos := sp.Pos
 
 		// calculate distance traveled since last frame
-		dtX := initVelo.X * float32(time.Seconds())
-		dtY := initVelo.Y * float32(time.Seconds())
-		dtZ := initVelo.Z * float32(time.Seconds())
+		dtX := (initVelo.X + sp.OuterForce.X) * float32(time.Seconds())
+		dtY := (initVelo.Y + sp.OuterForce.Y) * float32(time.Seconds())
+		dtZ := (initVelo.Z + sp.OuterForce.Z) * float32(time.Seconds())
 
 		sp.Update(
 			dtX+initPos.X,
 			dtY+initPos.Y,
 			dtZ+initPos.Z,
 		)
-		//s.UpdateVelo(initVelo, time)
+		s.ApplyGravity(sp)
 	}
 }
 
-// UpdateVelo -> updates the velocity of objects
-// according to the forces in the simulation and acceleration.
-// does so each frame
-func (s *Sim) UpdateVelo(initVelo *math32.Vector3, time time.Duration) {
+func (s *Sim) ApplyGravity(sphere *model.Sphere) {
+	// force = mass * acceleration
+	sphere.Velo.Y = (s.Gravity.Y * sphere.Mass) + sphere.OuterForce.Y
+}
+
+func (s *Sim) CheckCollisions() {
+
+	// check if they have hit the ground
+	for _, sphere := range s.Spheres {
+
+		// check if the sphere is above the surface
+		// not what this is doing ...
+		if sphere.Pos.Y <= s.Plane.W {
+			// shoot it back up
+
+		}
+
+		// if not, then it could not hit the surface
+
+	}
+
 }
