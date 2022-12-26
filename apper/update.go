@@ -16,7 +16,7 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 
 	a.Cam.UpdatePos()
 	if a.Sim != nil {
-		a.Sim.UpdateObjs(dt)
+		a.Sim.Update(dt)
 	}
 
 	err := r.Render(a.Scene, a.Cam.Self)

@@ -37,6 +37,11 @@ func (s *Sim) SetGravity(x, y, z float32) {
 func (s *Sim) Init() {
 }
 
+func (s *Sim) Update(time time.Duration) {
+	s.UpdateObjs(time)
+	s.CheckCollisions()
+}
+
 // UpdateObjs -> to be run each frame
 func (s *Sim) UpdateObjs(time time.Duration) {
 	for _, sp := range s.Spheres {
@@ -54,7 +59,6 @@ func (s *Sim) UpdateObjs(time time.Duration) {
 			dtY+initPos.Y,
 			dtZ+initPos.Z,
 		)
-		s.CheckCollisions()
 		s.ApplyGravity(sp)
 
 	}
@@ -76,17 +80,13 @@ func (s *Sim) CheckCollisions() {
 
 		// check if the sphere is above the surface
 		// not what this is doing ...
-		if sphere.Pos.Y-sphere.R <= 0 {
+		if sphere.Pos.Y-sphere.R <= s.Plane.LocY {
 			// then make it bounce
 			sphere.ApplyForce(
 				sphere.Velo.X,
-				-sphere.Velo.Y,
+				math32.Abs(sphere.Velo.Y)*1.2,
 				sphere.Velo.Z,
 			)
 		}
-
-		// if not, then it could not hit the surface
-
 	}
-
 }

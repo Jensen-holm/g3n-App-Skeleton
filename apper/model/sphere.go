@@ -83,3 +83,9 @@ func (s *Sphere) UpdateVelo(deltaX, deltaY, deltaZ float32) {
 		s.Velo.Z+deltaZ,
 	)
 }
+
+func (s *Sphere) ResetForce() {
+	s.OuterForce.X = 0
+	s.OuterForce.Y = 0
+	s.OuterForce.Z = 0
+}
