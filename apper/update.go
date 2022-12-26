@@ -17,8 +17,8 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 
 	a.Cam.UpdatePos()
 	if a.Sim != nil {
-		//a.Sim.UpdateObjsPos()
-		a.Sim.Update(dt)
+		a.Sim.UpdateObjs(dt)
+
 		fmt.Println(a.Sim.Spheres[0].Pos)
 	}
 

@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	a := app.NewApp(true)
+	a := app.NewApp(false)
 	Init(a)
 	a.Run()
 }
@@ -21,13 +21,14 @@ func Init(a *app.App) {
 	a.AddSim(sim)
 	sim.AddConstantForce(0, -.98, 0)
 
-	ball := model.NewSphere(3, 1, 1, 3, "purple")
-	ball2 := model.NewSphere(3, 0, 0, 3, "green")
+	ball := model.NewSphere(10, 10, 3, 3, 145, "purple")
+	ball2 := model.NewSphere(1, 1, 3, 3, 145, "green")
 
-	ball.SetVelo(2, 0, 0)
-	ball2.SetVelo(2, 0, 0)
+	ball.SetVelo(1, 0, 0)
 
 	sim.AddSphere(ball, ball2)
+
+	sim.AddConstantForce(0, -1, 0)
 
 	ground := model.NewPlane(500, 500, 90, "slategray", false)
 

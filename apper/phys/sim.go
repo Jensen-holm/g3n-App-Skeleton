@@ -23,11 +23,6 @@ func (s *Sim) AddSphere(spheres ...*model.Sphere) {
 	}
 }
 
-//	func (s *Sim) UpdateObjsPos() {
-//		for _, sp := range s.Spheres {
-//			sp.UpdatePos()
-//		}
-//	}
 func (s *Sim) AddConstantForce(x, y, z float32) {
 	s.ConstantForces = append(
 		s.ConstantForces,
@@ -41,31 +36,29 @@ func (s *Sim) AddConstantForce(x, y, z float32) {
 func (s *Sim) Init() {
 }
 
-// Update -> to be run each frame
-func (s *Sim) Update(time time.Duration) {
+// UpdateObjs -> to be run each frame
+func (s *Sim) UpdateObjs(time time.Duration) {
 	for _, sp := range s.Spheres {
 
 		initVelo := sp.Velo
 		initPos := sp.Pos
 
 		// calculate distance traveled since last frame
-		distTraveledX := initVelo.X * float32(time.Seconds())
-		distTraveledY := initVelo.Y * float32(time.Seconds())
-		distTraveledZ := initVelo.Z * float32(time.Seconds())
-
-		// update the objects position in space
-		//sp.Pos.X = distTraveledX + initVelo.X
-		//sp.Pos.Y = distTraveledY + initVelo.Y
-		//sp.Pos.Z = distTraveledZ + initVelo.Z
+		dtX := initVelo.X * float32(time.Seconds())
+		dtY := initVelo.Y * float32(time.Seconds())
+		dtZ := initVelo.Z * float32(time.Seconds())
 
 		sp.Update(
-			distTraveledX+initPos.X,
-			distTraveledY+initPos.Y,
-			distTraveledZ+initPos.Z,
+			dtX+initPos.X,
+			dtY+initPos.Y,
+			dtZ+initPos.Z,
 		)
-
-		// update the velocity based on acceleration ??
-		//for _, f := range s.ConstantForces {
-		//}
+		//s.UpdateVelo(initVelo, time)
 	}
+}
+
+// UpdateVelo -> updates the velocity of objects
+// according to the forces in the simulation and acceleration.
+// does so each frame
+func (s *Sim) UpdateVelo(initVelo *math32.Vector3, time time.Duration) {
 }

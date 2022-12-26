@@ -13,15 +13,15 @@ type Cam struct {
 
 func NewCam() *Cam {
 	cam := camera.New(1)
-	cam.SetPosition(10, 10, 10)
+	cam.SetPosition(100, 100, 100)
 	orb := camera.NewOrbitControl(cam)
 	return &Cam{
 		Self:  cam,
 		Orbit: orb,
 		Pos: &math32.Vector3{
-			X: 2,
-			Y: 2,
-			Z: 2,
+			X: 100,
+			Y: 100,
+			Z: 100,
 		},
 	}
 }
