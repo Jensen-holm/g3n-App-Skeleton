@@ -7,7 +7,7 @@ import (
 )
 
 func main() {
-	a := app.NewApp(false)
+	a := app.NewApp(true)
 	Init(a)
 	a.Run()
 }
@@ -19,15 +19,17 @@ func Init(a *app.App) {
 
 	sim := phys.NewSim()
 	a.AddSim(sim)
-	sim.SetGravity(0, -.98, 0)
+	sim.SetGravity(0, -10, 0)
 
 	// sphere mass in grams
-	ball := model.NewSphere(0, 500, 0, 3, 145, "red")
+	ball := model.NewSphere(0, 100, 0, 3, 145, "red")
 	ball2 := model.NewSphere(0, 3, 0, 3, 10, "green")
+
+	ball.ApplyForce(10, 10, 10)
 
 	sim.AddSphere(ball, ball2)
 
-	ground := model.NewPlane(500, 500, 90, "slategray", false)
+	ground := model.NewPlane(1000, 1000, 90, "slategray", false)
 	sim.SetPlane(ground)
 
 	l1 := app.Light("white", 1, 100, 100, 100)

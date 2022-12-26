@@ -31,12 +31,6 @@ func (s *Sim) SetGravity(x, y, z float32) {
 	s.Gravity = math32.NewVector3(x, y, z)
 }
 
-// Init -> if there are forces in the sim,
-// initialize them by changing the velocity of
-// the objects in the simulation
-func (s *Sim) Init() {
-}
-
 func (s *Sim) Update(time time.Duration) {
 	s.UpdateObjs(time)
 	s.CheckCollisions()
@@ -59,18 +53,16 @@ func (s *Sim) UpdateObjs(time time.Duration) {
 			dtY+initPos.Y,
 			dtZ+initPos.Z,
 		)
-		s.ApplyGravity(sp)
-
+		s.ApplyGravity(sp, time)
 	}
 }
 
-func (s *Sim) ApplyGravity(sphere *model.Sphere) {
+func (s *Sim) ApplyGravity(sphere *model.Sphere, time time.Duration) {
 	// force = mass * acceleration
-	sphere.Velo.Y = (s.Gravity.Y * sphere.Mass) + sphere.OuterForce.Y
+	sphere.Velo.Y = ((s.Gravity.Y * float32(time.Seconds())) * sphere.Mass) + sphere.OuterForce.Y
 }
 
 func (s *Sim) CheckCollisions() {
-
 	if s.Plane == nil {
 		return
 	}
