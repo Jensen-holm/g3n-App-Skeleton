@@ -1,7 +1,7 @@
 package apper
 
 import (
-	"App/apper/phys"
+	"github.com/Jensen-holm/g3n-App-Skeleton/apper/phys"
 	"github.com/g3n/engine/app"
 	"github.com/g3n/engine/core"
 	"github.com/g3n/engine/experimental/physics/object"

@@ -1,4 +1,4 @@
-module App
+module github.com/Jensen-holm/g3n-App-Skeleton
 
 go 1.19
 
