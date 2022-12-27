@@ -56,9 +56,12 @@ func NewSphere(x, y, z, r, m float32, c string) *Sphere {
 }
 
 func (s *Sphere) ApplyForce(x, y, z float32) {
-	s.OuterForce.X = x
-	s.OuterForce.Y = y
-	s.OuterForce.Z = z
+	//s.OuterForce.X = x
+	//s.OuterForce.Y = y
+	//s.OuterForce.Z = z
+	s.Velo.X = x
+	s.Velo.Y = y
+	s.Velo.Z = z
 }
 
 func (s *Sphere) SetVelo(vX, vY, vZ float32) {

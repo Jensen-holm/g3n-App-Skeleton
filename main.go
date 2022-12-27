@@ -13,7 +13,7 @@ func main() {
 }
 
 // Init -> This is where the apps
-// are customized using apper
+// are customized using apper wrapper
 func Init(a *app.App) {
 	a.AddBg(.5, .75, 2, .5)
 
@@ -21,11 +21,11 @@ func Init(a *app.App) {
 	a.AddSim(sim)
 	sim.SetGravity(0, -9.8, 0)
 
-	ball := model.NewSphere(0, 50, 0, 3, 145, "red")
-	ball.ApplyForce(10, 10, 10)
+	ball := model.NewSphere(0, 100, 0, 3, 145, "red")
+	ball.ApplyForce(50, 50, 50)
 	sim.AddSphere(ball)
 
-	ground := model.NewPlane(1000, 1000, 90, "slategray", false)
+	ground := model.NewPlane(10000, 10000, 90, "slategray", false)
 	sim.SetPlane(ground)
 
 	l1 := app.Light("white", 1, 100, 100, 100)

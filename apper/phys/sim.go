@@ -33,7 +33,6 @@ func (s *Sim) SetGravity(x, y, z float32) {
 
 func (s *Sim) Update(time time.Duration) {
 	s.UpdateObjs(time)
-	//s.CheckCollisions()
 }
 
 // UpdateObjs -> to be run each frame
@@ -44,9 +43,9 @@ func (s *Sim) UpdateObjs(time time.Duration) {
 		initPos := sp.Pos
 
 		// calculate distance traveled since last frame
-		dtX := (initVelo.X + sp.OuterForce.X) * float32(time.Seconds())
-		dtY := (initVelo.Y + sp.OuterForce.Y) * float32(time.Seconds())
-		dtZ := (initVelo.Z + sp.OuterForce.Z) * float32(time.Seconds())
+		dtX := (initVelo.X /*+sp.OuterForce.X*/) * float32(time.Seconds())
+		dtY := (initVelo.Y /*+ sp.OuterForce.Y*/) * float32(time.Seconds())
+		dtZ := (initVelo.Z /*+sp.OuterForce.Z*/) * float32(time.Seconds())
 
 		sp.Update(
 			dtX+initPos.X,

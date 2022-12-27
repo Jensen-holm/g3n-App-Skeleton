@@ -18,7 +18,7 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 	a.Cam.UpdatePos()
 	if a.Sim != nil {
 		a.Sim.Update(dt)
-		fmt.Println(a.Sim.Spheres[0].Velo)
+		fmt.Println(a.Sim.Spheres[0].Pos)
 	}
 
 	err := r.Render(a.Scene, a.Cam.Self)
