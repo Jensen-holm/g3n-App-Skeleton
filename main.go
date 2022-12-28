@@ -21,9 +21,9 @@ func Init(a *apper.App) {
 	a.AddSim(sim)
 	sim.SetGravity(0, -32.2, 0)
 
-	ball := model.NewSphere(0, 50, 0, 3, 145, "red")
+	ball := model.NewSphere(0, 50, 0, 3, 10, "red")
 	sim.AddSphere(ball)
-	ball.ApplyForce(10, 100, 10)
+	ball.ApplyForce(10, 132, 10)
 
 	ground := model.NewPlane(10000, 10000, 90, "slategray", false)
 	sim.SetPlane(ground)

@@ -59,7 +59,7 @@ func (s *Sim) UpdateObjs(time time.Duration) {
 }
 
 func (s *Sim) ApplyGravity(sphere *model.Sphere, time time.Duration) {
-	var deltaY = s.Gravity.Y * float32(time.Seconds())
+	var deltaY = (s.Gravity.Y * float32(time.Seconds())) * sphere.Mass
 	sphere.UpdateVelo(0, deltaY, 0)
 }
 
@@ -73,7 +73,10 @@ func (s *Sim) CheckCollisions() {
 		if sphere.Pos.Y-sphere.R <= s.Plane.LocY {
 			sphere.ApplyForce(
 				sphere.Velo.X,
-				-sphere.Velo.Y*.5,
+
+				// we will want to calculate this value somehow
+				// probably based on density and stuff
+				-sphere.Velo.Y*.8,
 				sphere.Velo.Z,
 			)
 		}
