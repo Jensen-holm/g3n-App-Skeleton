@@ -33,6 +33,7 @@ func (s *Sim) SetGravity(x, y, z float32) {
 
 func (s *Sim) Update(time time.Duration) {
 	s.UpdateObjs(time)
+	s.CheckCollisions()
 }
 
 // UpdateObjs -> to be run each frame
@@ -52,28 +53,27 @@ func (s *Sim) UpdateObjs(time time.Duration) {
 			dtY+initPos.Y,
 			dtZ+initPos.Z,
 		)
+
 		s.ApplyGravity(sp, time)
-		s.CheckCollisions()
 	}
 }
 
 func (s *Sim) ApplyGravity(sphere *model.Sphere, time time.Duration) {
-	// force = mass * acceleration
-	a := s.Gravity.Y * float32(time.Seconds())
-	sphere.Velo.Y = (sphere.Mass * a) + sphere.OuterForce.Y
+	var deltaY = s.Gravity.Y * float32(time.Seconds())
+	sphere.UpdateVelo(0, deltaY, 0)
 }
 
 func (s *Sim) CheckCollisions() {
 	if s.Plane == nil {
 		return
 	}
-	// check if they have hit the ground
-	// if so, for now we will just keep it on the ground
+
+	// as of now we are only checking if the spheres touch the ground
 	for _, sphere := range s.Spheres {
 		if sphere.Pos.Y-sphere.R <= s.Plane.LocY {
 			sphere.ApplyForce(
 				sphere.Velo.X,
-				-sphere.Velo.Y,
+				-sphere.Velo.Y*.5,
 				sphere.Velo.Z,
 			)
 		}
