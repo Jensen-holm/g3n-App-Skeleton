@@ -1,12 +1,13 @@
 package apper
 
 import (
-	"fmt"
 	"github.com/g3n/engine/gls"
 	"github.com/g3n/engine/renderer"
 	"log"
 	"time"
 )
+
+var totTime float32 = 0
 
 func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 	a.FrameRater.Start()
@@ -16,9 +17,12 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 	)
 
 	a.Cam.UpdatePos()
-	if a.Sim != nil {
+
+    // Currently will wait five seconds before
+    //updating the simulation (if there is one)
+    var t = int(totTime) > 5
+	if a.Sim != nil && t {
 		a.Sim.Update(dt)
-		fmt.Println(a.Sim.Spheres[0].Pos.Y)
 	}
 
 	err := r.Render(a.Scene, a.Cam.Self)
@@ -26,6 +30,7 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 		log.Fatalf("error rendering the scene: %v", err)
 	}
 
+    totTime += float32(dt)
 	a.FrameRater.Wait()
 }
 
