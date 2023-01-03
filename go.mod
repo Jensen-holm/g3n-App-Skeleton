@@ -1,4 +1,4 @@
-module github.com/Jensen-holm/g3n-App-Skeleton
+module github.com/Jensen-holm/g3n-Wrapper
 
 go 1.19
 

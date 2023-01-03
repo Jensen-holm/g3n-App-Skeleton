@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/Jensen-holm/g3n-App-Skeleton/apper"
-	"github.com/Jensen-holm/g3n-App-Skeleton/apper/model"
-	"github.com/Jensen-holm/g3n-App-Skeleton/apper/phys"
+	"github.com/Jensen-holm/g3n-Wrapper/apper"
+	"github.com/Jensen-holm/g3n-Wrapper/apper/model"
+	"github.com/Jensen-holm/g3n-Wrapper/apper/phys"
 )
 
 func main() {
