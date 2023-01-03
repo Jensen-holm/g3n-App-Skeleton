@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-var totTime float32 = 0
+var totTime float64 = 0
 
 func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 	a.FrameRater.Start()
@@ -31,8 +31,11 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 		log.Fatalf("error rendering the scene: %v", err)
 	}
 
-	totTime += float32(dt)
-	fmt.Println(totTime)
+	totTime += dt.Seconds()
+
+	// Print total time each frame
+	fmt.Print(fmt.Sprintf("\r%f", totTime))
+
 	a.FrameRater.Wait()
 }
 
