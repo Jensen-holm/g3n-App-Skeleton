@@ -17,11 +17,14 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 		gls.COLOR_BUFFER_BIT | gls.DEPTH_BUFFER_BIT | gls.STENCIL_BUFFER_BIT,
 	)
 
+	// this will be used in future to get
+	// the position of the camera, and move it
+	// according to keyboard controls
 	a.Cam.UpdatePos()
 
 	// Currently will wait five seconds before
 	//updating the simulation (if there is one)
-	var t = int(totTime) > 5
+	var t = int(totTime) >= 5
 	if a.Sim != nil && t {
 		a.Sim.Update(dt)
 	}
@@ -34,7 +37,7 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 	totTime += dt.Seconds()
 
 	// Print total time each frame
-	fmt.Print(fmt.Sprintf("\r%f", totTime))
+	fmt.Print(fmt.Sprintf("\rTotal Time: %f", totTime))
 
 	a.FrameRater.Wait()
 }
