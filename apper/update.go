@@ -8,8 +8,6 @@ import (
 	"time"
 )
 
-var totTime float64 = 0
-
 func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 	a.FrameRater.Start()
 
@@ -24,7 +22,7 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 
 	// Currently will wait five seconds before
 	//updating the simulation (if there is one)
-	var t = int(totTime) >= 5
+	var t = int(a.A.RunTime().Seconds()) >= 5
 	if a.Sim != nil && t {
 		a.Sim.Update(dt)
 	}
@@ -34,10 +32,8 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 		log.Fatalf("error rendering the scene: %v", err)
 	}
 
-	totTime += dt.Seconds()
-
 	// Print total time each frame
-	fmt.Print(fmt.Sprintf("\rTotal Time: %f", totTime))
+	fmt.Print(fmt.Sprintf("\rTotal Time: %f", a.A.RunTime().Seconds()))
 
 	a.FrameRater.Wait()
 }

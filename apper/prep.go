@@ -10,7 +10,6 @@ import (
 )
 
 func (a *App) Prep() {
-
 	gui.Manager().Set(a.Scene)
 	if a.Help {
 		a.Add2Scene(helper.NewAxes(10))
