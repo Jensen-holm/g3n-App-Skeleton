@@ -38,6 +38,14 @@ func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
 	a.FrameRater.Wait()
 }
 
+// Run -> if the user set their own custom update function,
+// use that one, else run the default one that we have above
 func (a *App) Run() {
-	a.A.Run(a.Update)
+
+	if a.CustomUpdate != nil {
+		a.A.Run(a.CustomUpdate)
+	} else {
+		a.A.Run(a.Update)
+	}
+
 }

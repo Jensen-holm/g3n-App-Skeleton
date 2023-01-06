@@ -49,3 +49,7 @@ func Init(a *apper.App) {
 		ball2.Mesh,
 	)
 }
+
+func Update() {
+
+}
