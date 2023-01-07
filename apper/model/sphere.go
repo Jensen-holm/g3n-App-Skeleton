@@ -57,14 +57,6 @@ func (s *Sphere) ApplyForce(x, y, z float32) {
 	s.Velo.Z = z
 }
 
-func (s *Sphere) SetVelo(vX, vY, vZ float32) {
-	s.Velo = &math32.Vector3{
-		X: vX,
-		Y: vY,
-		Z: vZ,
-	}
-}
-
 func (s *Sphere) Update(newX, newY, newZ float32) {
 	s.Body.SetPosition(newX, newY, newZ)
 	s.Pos.X = newX

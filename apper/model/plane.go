@@ -1,6 +1,7 @@
 package model
 
 import (
+	"github.com/Jensen-holm/g3n-Wrapper/apper/phys"
 	"github.com/g3n/engine/experimental/physics/object"
 	"github.com/g3n/engine/geometry"
 	"github.com/g3n/engine/graphic"
@@ -34,7 +35,7 @@ func NewPlane(w, h, a float32, color string, wire bool) *Plane {
 	// double-sided by default
 	mat.SetSide(material.SideDouble)
 	mesh := graphic.NewMesh(p, mat)
-	mesh.RotateX(Deg2Rad(a))
+	mesh.RotateX(phys.Deg2Rad(a))
 	b := object.NewBody(mesh)
 	return &Plane{
 		G:    p,
@@ -45,8 +46,4 @@ func NewPlane(w, h, a float32, color string, wire bool) *Plane {
 		W:    w,
 		H:    h,
 	}
-}
-
-func Deg2Rad(deg float32) float32 {
-	return deg * (math32.Pi / 180)
 }

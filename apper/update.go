@@ -49,3 +49,9 @@ func (a *App) Run() {
 	}
 
 }
+
+// GetFps -> for the user to use should they choose to
+// create and use their own custom update function
+func GetFps(dt time.Duration, iters int) float32 {
+	return float32(iters) / float32(dt.Seconds())
+}

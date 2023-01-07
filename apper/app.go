@@ -33,6 +33,8 @@ func NewApp(helper bool) *App {
 	return a
 }
 
-func (a *App) SetUpdateFunc(customUpdate func(renderer *renderer.Renderer, dt time.Duration)) {
+func (a *App) SetUpdateFunc(
+	customUpdate func(renderer *renderer.Renderer, dt time.Duration),
+) {
 	a.CustomUpdate = customUpdate
 }

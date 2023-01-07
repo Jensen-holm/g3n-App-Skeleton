@@ -34,13 +34,3 @@ func (c *Cam) UpdatePos() {
 		c.Pos = &p
 	}
 }
-
-// Move -> Ran when the user presses certain keys to
-// move them around the simulation, updates the Pos map
-func (c *Cam) Move(x, y, z float32) {
-
-	// move the camera to those coords
-	// the Pos vector will be updated in the
-	// UpdatePos function
-	c.Self.SetPosition(x, y, z)
-}

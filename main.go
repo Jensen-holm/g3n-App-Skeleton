@@ -2,7 +2,6 @@ package main
 
 import (
 	"github.com/Jensen-holm/g3n-Wrapper/apper"
-	ui "github.com/Jensen-holm/g3n-Wrapper/apper/gui"
 	"github.com/Jensen-holm/g3n-Wrapper/apper/model"
 	"github.com/Jensen-holm/g3n-Wrapper/apper/phys"
 )
@@ -39,8 +38,6 @@ func Init(a *apper.App) {
 	l3 := apper.Light("white", 1, -100, -100, -100)
 	l4 := apper.Light("white", 1, 100, -100, 100)
 
-	ui.NewUI("jensens app", a)
-
 	a.Add2Scene(
 		a.Cam.Self,
 		l1, l2, l3, l4,
@@ -48,8 +45,4 @@ func Init(a *apper.App) {
 		ball.Mesh,
 		ball2.Mesh,
 	)
-}
-
-func Update() {
-
 }
