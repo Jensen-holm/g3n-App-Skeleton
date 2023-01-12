@@ -71,3 +71,9 @@ func (s *Sphere) UpdateVelo(deltaX, deltaY, deltaZ float32) {
 		s.Velo.Z+deltaZ,
 	)
 }
+
+func (s *Sphere) Stop(){
+    s.Velo.X = 0
+    s.Velo.Y = 0
+    s.Velo.Z = 0
+}
