@@ -41,6 +41,10 @@ func Init(a *apper.App) {
 	a.Add2Scene(
 		a.Cam.Self,
 		l1, l2, l3, l4,
+
+		// If you want an invisible surface,
+		// simple create the ground but don't add
+		// its mesh to the scene
 		ground.Mesh,
 		ball.Mesh,
 		ball2.Mesh,
