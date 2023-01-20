@@ -34,6 +34,10 @@ func NewPlane(w, h, a float32, color string, wire bool) *Plane {
 	// double-sided by default
 	mat.SetSide(material.SideDouble)
 	mesh := graphic.NewMesh(p, mat)
+
+	// cannot use my own conversion function
+	// that is in the phys package because of
+	// a circular import issue
 	mesh.RotateX(a * (math32.Pi / 180))
 	b := object.NewBody(mesh)
 	return &Plane{
