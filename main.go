@@ -1,6 +1,8 @@
 package main
 
 import (
+	"math/rand"
+
 	"github.com/Jensen-holm/g3n-Wrapper/apper"
 	"github.com/Jensen-holm/g3n-Wrapper/apper/model"
 	"github.com/Jensen-holm/g3n-Wrapper/apper/phys"
@@ -24,12 +26,6 @@ func Init(a *apper.App) {
 	a.AddSim(sim)
 	sim.SetGravity(0, -32.2, 0)
 
-	ball := model.NewSphere(0, 50, 0, 3, 10, "red")
-	ball2 := model.NewSphere(0, 100, 0, 10, 20, "green")
-
-	sim.AddSphere(ball, ball2)
-	ball.ApplyForce(10, 132, 10)
-
 	ground := model.NewPlane(10000, 10000, 90, "slategray", false)
 	sim.SetPlane(ground)
 
@@ -42,11 +38,17 @@ func Init(a *apper.App) {
 		a.Cam.Self,
 		l1, l2, l3, l4,
 
-		// If you want an invisible surface,
-		// simple create the ground but don't add
+		// If you want an invisible plane,
+		// create the ground but don't add
 		// its mesh to the scene
 		ground.Mesh,
-		ball.Mesh,
-		ball2.Mesh,
 	)
+
+	for i := 0; i < 20; i++ {
+		ball := model.NewSphere(float32(rand.Intn(50)), float32(rand.Intn(50)), float32(rand.Intn(50)), float32(rand.Intn(50)), float32(rand.Intn(50)), "blue")
+		sim.AddSphere(ball)
+		ball.ApplyForce(float32(rand.Intn(500)), float32(rand.Intn(500)), float32(rand.Intn(500)))
+		a.Add2Scene(ball.Mesh)
+	}
+
 }

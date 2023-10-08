@@ -1,9 +1,10 @@
 package phys
 
 import (
+	"time"
+
 	"github.com/Jensen-holm/g3n-Wrapper/apper/model"
 	"github.com/g3n/engine/math32"
-	"time"
 )
 
 type Sim struct {
@@ -68,7 +69,9 @@ func (s *Sim) CheckCollisions() {
 		return
 	}
 
-	// as of now we are only checking if the spheres touch the ground
+	// as of now we are only checking if the spheres touch the plane
+	// we are going to work on having multiple planes. Then checking
+	// for ball on ball collisions once we can handle multiple planes
 	for _, sphere := range s.Spheres {
 		if sphere.Pos.Y-sphere.R <= s.Plane.LocY {
 			sphere.ApplyForce(

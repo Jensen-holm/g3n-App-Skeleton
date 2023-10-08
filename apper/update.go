@@ -2,10 +2,11 @@ package apper
 
 import (
 	"fmt"
-	"github.com/g3n/engine/gls"
-	"github.com/g3n/engine/renderer"
 	"log"
 	"time"
+
+	"github.com/g3n/engine/gls"
+	"github.com/g3n/engine/renderer"
 )
 
 func (a *App) Update(r *renderer.Renderer, dt time.Duration) {
