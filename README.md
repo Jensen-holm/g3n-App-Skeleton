@@ -1,4 +1,4 @@
-# g3n-App-Skeleton
-starter application for the g3n application framework
+# G3N graphics engine wrapper 
 
-This module is used in my 'RealTimeMlb' project.
+A wrapper for the G3N computer graphics library with built in physics simulation package.
+
